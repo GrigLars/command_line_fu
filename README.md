@@ -77,7 +77,7 @@ netstat -peanut
     tcp6       0      0 :::22                   :::*                    LISTEN      0          15760       -               
     udp        0      0 0.0.0.0:68              0.0.0.0:*                           0          14371       -               
 
-lsof -i
+List open interface: lsof -i
 
 	vagrant@ubuntu-xenial:~$ sudo lsof -i
 	COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
@@ -89,7 +89,10 @@ lsof -i
 	sshd     2272    root    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
 	sshd     2334 vagrant    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
 
+List open interface for just port 22
 
+	lsof -i :22
+    
 #### Start a process on a different tty:
 This was handy with the Raspberry Pi when I ssh'd in and had to display an output on the attached screen
 
@@ -241,14 +244,13 @@ Say you've got a utility, and you think it's trying to read a config file, but y
 
     strace -o [output file]
 
-#### List open interface for port 22
-    lsof -i :22
-
 #### Find all logs which have changed within 5 minutes
 
     find /var/log -mmin -5 
 
 #### Sometimes instead of netcat you can use socat. Sure it isn't as simple but has a lot more features.
+
+    apt-get install socat
 
 #### Packages you like (note, some may be named different in deb vs. rpm packages):
 ncdu screen telnet vim-enhanced multitail lynx bind-utils curl wget openssh-clients lsof net-snmp rsync mlocate man zip unzip htop at yum-utils tree tmux policycoreutils-python boxes figlet sysstat tcpdump 
@@ -264,7 +266,7 @@ ncdu screen telnet vim-enhanced multitail lynx bind-utils curl wget openssh-clie
 #### Mailing when people login
 In /etc/pam.d/sshd
 
-	session    optional     pam_exec.so /usr/local/bin/send-mail-on-ssh-login.sh
+    session    optional     pam_exec.so /usr/local/bin/send-mail-on-ssh-login.sh
 
 #### show context in grep 2 lines before AND after
 
