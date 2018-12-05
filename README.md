@@ -1,9 +1,67 @@
 # Command Line Fu
-These are just notes for command line stuff I have learned over the years: shortcuts and so on.  They are in no order, esxcept the most recent discoveries are often on top.
+These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.
 
-#### Netstat 
+#### Make sure you are root in a script
 
-    netstat -peanut
+	if [ "$(whoami)" != 'root' ]; then
+		echo -e "\e[31;1m$0: ERROR: You have no permission to run $0 as non-root user.\e[0m"
+		exit 1;
+	fi
+
+#### Basic IPtables stuff
+
+Some variables and packages in this Ubuntu example:
+
+	SUBNETINT="192.168.11.0/24"
+	apt-get update
+	apt-get upgrade -y
+	apt-get install -y netfilter-persistent
+
+If ufw is on this system, disable it
+
+	ufw disable
+
+Clear out any old rules
+
+    iptables -P INPUT ACCEPT
+    iptables -P INPUT ACCEPT
+    iptables -P FORWARD ACCEPT
+    iptables -F
+    iptables -Z
+
+Make sure we don't hang up on ourselves, and keep ssh port open
+
+    iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+    iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+    iptables -A INPUT -i lo -j ACCEPT
+
+Set UDP ports for a VPN
+
+    iptables -A INPUT -p udp --dport  500 -j ACCEPT
+    iptables -A INPUT -p udp --dport 4500 -j ACCEPT
+
+Set policy routing
+
+    iptables -A FORWARD --match policy --pol ipsec --dir in  --proto esp -s ${SUBNETINT} -j ACCEPT
+    iptables -A FORWARD --match policy --pol ipsec --dir out  --proto esp -s ${SUBNETINT} -j ACCEPT
+    iptables -t nat -A POSTROUTING -s ${SUBNETINT} -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
+    iptables -t nat -A POSTROUTING -s ${SUBNETINT} -o eth0 -j MASQUERADE
+    iptables -t mangle -A FORWARD --match policy --pol ipsec --dir in -s ${SUBNETINT} -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
+
+
+Block all other connections
+
+    iptables -A INPUT -j DROP
+    iptables -A FORWARD -j DROP
+
+Save that, needs package "iptables-persistent"
+
+    netfilter-persistent save
+    netfilter-persistent reload
+
+#### Network tools 
+
+netstat -peanut
     
     ubuntu@vpn-strongswan:~$ netstat -peanut
     (Not all processes could be identified, non-owned process info
@@ -19,9 +77,21 @@ These are just notes for command line stuff I have learned over the years: short
     tcp6       0      0 :::22                   :::*                    LISTEN      0          15760       -               
     udp        0      0 0.0.0.0:68              0.0.0.0:*                           0          14371       -               
 
+lsof -i
+
+	vagrant@ubuntu-xenial:~$ sudo lsof -i
+	COMMAND   PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+	dhclient  874    root    6u  IPv4  11617      0t0  UDP *:bootpc 
+	chronyd  1402 _chrony    2u  IPv4  17457      0t0  UDP localhost:323 
+	chronyd  1402 _chrony    3u  IPv6  17458      0t0  UDP ip6-localhost:323 
+	sshd     1424    root    3u  IPv4  16654      0t0  TCP *:ssh (LISTEN)
+	sshd     1424    root    4u  IPv6  16663      0t0  TCP *:ssh (LISTEN)
+	sshd     2272    root    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
+	sshd     2334 vagrant    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
+
 
 #### Start a process on a different tty:
-This was handy with the Raspberry pi when I ssh'd in and had to display an output on the attached screen
+This was handy with the Raspberry Pi when I ssh'd in and had to display an output on the attached screen
 
     setsid sh -c 'exec command <> /dev/tty2 >&0 2>&1'
 
