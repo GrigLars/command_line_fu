@@ -1,5 +1,5 @@
 # Command Line Fu
-These are just notes for command line stuff I have learned over the years: shortcuts and so on
+These are just notes for command line stuff I have learned over the years: shortcuts and so on.  They are in no order, esxcept the most recent discoveries are often on top.
 
 #### Netstat 
 
@@ -52,3 +52,41 @@ Then type:
 
     xinput set-prop 12 "Device Enabled" 0
 
+#### Un-ban someone in a running "fail2ban" setup
+
+     fail2ban-client set ssh unbanip 123.123.123.123
+
+#### Ansible notes:
+Useful for things that need separate lines:
+
+    extra_lines: |      
+      first line
+      second line
+      third line
+      
+Will display:
+
+    1. first line
+    2. second line
+    3. third line
+
+Useful for things that need to be indented but in reality is all one line
+
+    extra_lines: >
+      first line
+      second line
+      third line
+
+Will display:
+
+    first line second line third line
+
+Other stuff:
+
+    --forks  # The default is 5.
+
+    ansible-playbook -u ubuntu -i inventory/dev/ec2.py --vault-password-file=~/.ssh/ansible_vault_pass.txt dev-deploy.yml --private-key=~/.ssh/dev-key.pem --limit 192.168.5.4 --list-hosts
+
+#### That software that has variables for docker in key/value pairs
+- consul.io
+- vaultproject.io
