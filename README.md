@@ -89,9 +89,16 @@ List open interface: lsof -i
 	sshd     2272    root    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
 	sshd     2334 vagrant    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
 
-List open interface for just port 22
+List open interface for just port 22: lsof -i :22
 
-	lsof -i :22
+
+	vagrant@ubuntu-xenial:~$ sudo lsof -i :22
+	COMMAND  PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+	sshd    1424    root    3u  IPv4  16654      0t0  TCP *:ssh (LISTEN)
+	sshd    1424    root    4u  IPv6  16663      0t0  TCP *:ssh (LISTEN)
+	sshd    2272    root    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
+	sshd    2334 vagrant    3u  IPv4  37525      0t0  TCP 192.168.111.15:ssh->192.168.111.2:33696 (ESTABLISHED)
+
     
 #### Start a process on a different tty:
 This was handy with the Raspberry Pi when I ssh'd in and had to display an output on the attached screen
@@ -161,8 +168,8 @@ Other stuff:
     ansible-playbook -u ubuntu -i inventory/dev/ec2.py --vault-password-file=~/.ssh/ansible_vault_pass.txt dev-deploy.yml --private-key=~/.ssh/dev-key.pem --limit 192.168.5.4 --list-hosts
 
 #### That software that has variables for docker in key/value pairs
-- consul.io
-- vaultproject.io
+- https://consul.io
+- https://vaultproject.io
 
 #### Unix permissions: dealing with my dyslexia 
 The order is L->R: is User/Owner, Group, Everyone/Other
