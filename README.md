@@ -21,5 +21,34 @@ These are just notes for command line stuff I have learned over the years: short
 
 
 #### Start a process on a different tty:
+This was handy with the Raspberry pi when I ssh'd in and had to display an output on the attached screen
 
-  setsid sh -c 'exec command <> /dev/tty2 >&0 2>&1'
+    setsid sh -c 'exec command <> /dev/tty2 >&0 2>&1'
+
+#### Windows instead of snipping tool shortcut
+
+    Win + shift + s
+ 
+#### Show what inputs are attached and to disable touchpad on Levono laptops with Ubuntu
+
+    xinput list
+
+You will get output like:
+
+    Virtual core pointer                      id=2    [master pointer  (3)]
+    Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+    SynPS/2 Synaptics TouchPad                id=12   [slave  pointer  (2)]
+    Virtual core keyboard                     id=3    [master keyboard (2)]
+    Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    Power Button                              id=6    [slave  keyboard (3)]
+    Video Bus                                 id=7    [slave  keyboard (3)]
+    Power Button                              id=8    [slave  keyboard (3)]
+    Sleep Button                              id=9    [slave  keyboard (3)]
+    Laptop_Integrated_Webcam_1.3M             id=10   [slave  keyboard (3)]
+    AT Translated Set 2 keyboard              id=11   [slave  keyboard (3)]
+    Dell WMI hotkeys                          id=13   [slave  keyboard (3)]
+
+Then type:
+
+    xinput set-prop 12 "Device Enabled" 0
+
