@@ -20,4 +20,6 @@ These are just notes for command line stuff I have learned over the years: short
     udp        0      0 0.0.0.0:68              0.0.0.0:*                           0          14371       -               
 
 
-#### 
+#### Start a process on a different tty:
+
+  setsid sh -c 'exec command <> /dev/tty2 >&0 2>&1'
