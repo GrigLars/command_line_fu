@@ -3,7 +3,8 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### AURGH which is it, adduser or useradd?
 
-	useradd - create a user, but not set any passwords or home directories: good for scripts (useradd -D adds defaults)
+	useradd - create a user, but not set any passwords or home directories: 
+		  good for scripts (useradd -D adds defaults)
 	useredl - delete user (userdel -f is a complete purge of home directory, mail spool, etc)
 	
 	adduser - The interactive shell
@@ -510,7 +511,7 @@ To view the key size from a certificate:
 #### How do I compare a key to a cert?
 
 	openssl x509 -noout -modulus -in /etc/ssl/certs/example.crt | openssl md5;\
-    openssl rsa -noout -modulus -in /etc/ssl/private/example.key | openssl md5
+	openssl rsa -noout -modulus -in /etc/ssl/private/example.key | openssl md5
 
 
 #### Print out separate colors for each output	
@@ -600,7 +601,6 @@ and again, be careful with the quotes and back-ticks.
 #### To add an ssh port on SELinux:
 
 	semanage port -a -t ssh_port_t -p tcp 222
-	
 
 #### Make a 4gb swap file
 
