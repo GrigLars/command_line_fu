@@ -533,9 +533,9 @@ To view the key size from a certificate:
 
 #### My rsync reminder (because I always get confused)
 
-  rsync -auvz source/ dest/
-  rsync -auvz source/ dest
-  rsync -auvz source/* dest
+    rsync -auvz source/ dest/
+    rsync -auvz source/ dest
+    rsync -auvz source/* dest
 
 will take all the files and subdirectories from source/ and put it into dest/	
 
