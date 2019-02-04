@@ -178,6 +178,7 @@ Other stuff:
 
     --check 		# Will do a dry run
     --syntax-check	# Will check yaml structure
+    --list-hosts	# Will lists hosts it would run on
     
 #### That software that has variables for docker in key/value pairs
 - https://consul.io
