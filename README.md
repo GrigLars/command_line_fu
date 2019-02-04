@@ -176,7 +176,7 @@ Other stuff:
 
     ansible-playbook -u ubuntu -i inventory/dev/ec2.py --vault-password-file=~/.ssh/ansible_vault_pass.txt dev-deploy.yml --private-key=~/.ssh/dev-key.pem --limit 192.168.5.4 --list-hosts
 
-    --check 		# Will do a dry run
+    --check 	# Will do a dry run
     --syntax-check	# Will check yaml structure
     --list-hosts	# Will lists hosts it would run on
     
