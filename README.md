@@ -419,6 +419,25 @@ You need to have an ~/.xscreensaver file. There needs to be at least this line:
     -u will not allow unset/undefined variables (like perl strict)
     -x debug mode 
 
+#### bash sequencing
+
+	for srv in server{1..5}; do echo "$srv";done
+	server1
+	server2
+	server3
+	server4
+	server5
+
+#### bash sequencing with seq auto-adjusting for width
+
+	for srv in $(seq -w 5 10); do echo "server${srv}";done
+	server05
+	server06
+	server07
+	server08
+	server09
+	server10
+
 #### String maniuplation in bash
 len() in bash
 
@@ -484,6 +503,30 @@ string to upper case (all caps)
         $ echo "${string^^[aeiou]}"
         A fEw wOrds
 
+Extract string replacing "cut" or "awk" fields
+
+        $ STRING="username:homedir:shell"
+        $ echo "$STRING"|cut -d ":" -f 3
+        shell
+        $ echo "${STRING##*:}"
+        shell
+	
+Extract the value after equal character
+
+	$ VAR="myClassName = helloClass"
+	$ echo ${VAR##*= }
+	helloClass
+
+Extract text in round brackets:
+
+	$ VAR="Hello my friend (enemy)"
+	$ TEMP="${VAR##*\(}"
+	$ echo "${TEMP%\)}"
+	enemy
+
+#### Enable PCRE to group in grep
+
+	tail -f application.log | grep -i -P "(error|warning|failure)"
 
 #### Human copy with progress bar	
 
