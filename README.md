@@ -1,6 +1,10 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.
 
+#### Change default browser launched on command line in Ubuntu
+
+    sudo update-alternatives –config x-www-browser
+
 #### Add timeout option to read command, but in case of interactive execution, user can easily skip waiting.
 
 	read -p "Press any key to continue (auto continue in 30 seconds) " -t 30 -n 1
