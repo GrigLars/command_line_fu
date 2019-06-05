@@ -1,6 +1,20 @@
 # Command Line Fu
-These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.
+These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Some git stuff I forget
+
+When, for some reason, my local master branch has some changes I don't care about, to reset to origin/master
+
+    git fetch origin
+    git reset --hard origin/master
+    git clean -n -f			# Clean localfiles (show only)
+    git clean -f			# Clean localfiles (for reals)
+    git clean -d -f 			# Also clean local directories
+    
+If you haven't pulled recently, when branch is out for long time and you need to add changes made to origin/master since
+
+    git rebase master
+    
 #### Change default browser launched on command line in Ubuntu
 
     sudo update-alternatives –config x-www-browser
