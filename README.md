@@ -1,6 +1,13 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### awk "print everything past the first two columns" 
+
+For those times you want to weed out time stamps, this will print all but two first columns:
+
+    awk '{$1=$2=""; print $0}' somefile
+
+
 #### Some git stuff I forget
 
 When, for some reason, my local master branch has some changes I don't care about, to reset to origin/master
