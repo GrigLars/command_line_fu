@@ -1,6 +1,10 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### sort IP addresses in a sane way
+
+    sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 ./list_of_addresses.txt
+
 #### awk "print everything past the first two columns" 
 
 For those times you want to weed out time stamps, this will print all but two first columns:
