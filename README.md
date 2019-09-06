@@ -1,6 +1,18 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Disabling vagrant-guest plugin for a weird vbox
+
+Sometimes you get a weird box that doesn't want to or just can't install guest additions in VM, so you have to add some tweaks in the vagrantfile in the Vagrant.configure section (usually most of the file):
+
+    Vagrant.configure("2") do |config|
+      ....
+      if Vagrant.has_plugin?("vagrant-vbguest")
+        config.vbguest.auto_update = false
+      end
+      ....
+    end
+
 #### sort IP addresses in a sane way
 
     sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 ./list_of_addresses.txt
