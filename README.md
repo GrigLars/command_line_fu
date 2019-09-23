@@ -1,6 +1,10 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Seeing a conf file without comments or blank spaces
+
+    grep -v "^#\|^$" filename.conf
+
 #### Disabling vagrant-guest plugin for a weird vbox
 
 Sometimes you get a weird box that doesn't want to or just can't install guest additions in VM, so you have to add some tweaks in the vagrantfile in the Vagrant.configure section (usually most of the file):
