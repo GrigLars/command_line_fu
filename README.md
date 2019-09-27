@@ -1,6 +1,12 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### A rare Windows one: get all the system info in a dump
+
+Sometimes I forget what this is called, like msconfig32 or wincfg32 or something.  Always forget it's:
+
+    "C:\Program Files\Common Files\Microsoft Shared\MSInfo\msinfo32.exe"
+
 #### Seeing a conf file without comments or blank spaces
 
     grep -v "^#\|^$" filename.conf
