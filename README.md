@@ -1,6 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Something I learned about k3b files
+
+I had a project that I had saved in multiple k3b files.  Years and years went by.  Then, for reasons that I don't know you well enough to go into (whale biologist) I had to see what files were saved and recreate burning audio CDs from them.  First, I had to find CD blanks.  But the next thing was "what the heck are k3b file data stored as?"  I went through a lot of research, and found they are just zipped files with metadata in an XML format stored in them as "maindata.xml."  I had to install the xsltproc and figure out the stylesheet to decode it (included in thius repo).  This is imperfect, but it works.  I found out what files they had, and was able to recreate them in K3B or another burner program.
+
+    for foo in $(ls *.k3b); do 
+      unzip -p $foo maindata.xml > "$foo.xml"
+      xsltproc k3b_stylesheet.xslt $foo.xml > "$foo.cd.txt"
+      rm $foo.xml
+    done
+
 #### A rare Windows one: get all the system info in a dump
 
 Sometimes I forget what this is called, like msconfig32 or wincfg32 or something.  Always forget it's:
