@@ -8,7 +8,7 @@ I kept getting errors in KDE/sddm a.k.a. Kubuntu that would pop up two dialoge b
     Configuration file "//.config/kwalletd5rc" not writable. Please contact your system administrator.
     Configuration file "//.kde/share/config/kwalletdrc" not writable. Please contact your system administrator.
     
-It did that at every fresh sddm login. For Kubuntu 14.04, 16.04, and even 18.04.  Why is this happening when I don't even USE kwallet?  I did a lot of research, and it turns out that this is due to some bug nobody has fixed for some reason when the pam.d modules are loaded, and they ask for /{$HOME}/[confg stuff] and $HOME is not defined. So just disable these 4 lines in /etc/pam.d/sddm
+It did that at every fresh sddm login. For Kubuntu 14.04, 16.04, and even 18.04.  Why is this happening when I don't even USE kwallet?  I did a lot of research, and it turns out that this is due to some bug nobody has fixed for some reason when the pam.d modules are loaded, and they ask for /{$HOME}/[config stuff] and $HOME is not defined. So just disable these 4 lines in /etc/pam.d/sddm
 
     # -auth   optional        pam_kwallet.so
     # -auth   optional        pam_kwallet5.so
@@ -18,11 +18,11 @@ and
     # -session optional       pam_kwallet.so auto_start
     # -session optional       pam_kwallet5.so auto_start
 
-When you restart, those boxes go away.  I am not sure what this will do when you USE kwallet and its subsystem, but that wasn't my problem.
+When you restart, those boxes go away.  I am not sure what this will do when you USE kwallet and its subsystem (probably nothing good), but that wasn't my problem.
 
 #### Something I learned about k3b files
 
-I had a project that I had saved in multiple k3b files.  Years and years went by.  Then, for reasons that I don't know you well enough to go into (whale biologist) I had to see what files were saved and recreate burning audio CDs from them.  First, I had to find CD blanks.  But the next thing was "what the heck are k3b file data stored as?"  I went through a lot of research, and found they are just zipped files with metadata in an XML format stored in them as "maindata.xml."  I had to install the xsltproc and figure out the stylesheet to decode it (included in thius repo).  This is imperfect, but it works.  I found out what files they had, and was able to recreate them in K3B or another burner program.
+I had a project that I had saved in multiple k3b files.  Years and years went by. I had to see what files were saved and recreate burning audio CDs from them.  First, I had to find CD blanks.  But the next thing was "what the heck are k3b file data stored as?"  I went through a lot of research, and found they are just zipped files with metadata in an XML format stored in them as "maindata.xml."  I had to install the xsltproc and figure out the stylesheet to decode it (included in this repo).  This is imperfect, but it works.  I found out what files they had, and was able to recreate them in K3B or another burner program.
 
     for foo in $(ls *.k3b); do 
       unzip -p $foo maindata.xml > "$foo.xml"
