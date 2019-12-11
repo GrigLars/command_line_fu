@@ -89,7 +89,7 @@ If you haven't pulled recently, when branch is out for long time and you need to
 
 	useradd - create a user, but not set any passwords or home directories: 
 		  good for scripts (useradd -D adds defaults)
-	useredl - delete user (userdel -f is a complete purge of home directory, mail spool, etc)
+	userdel - delete user (userdel -f is a complete purge of home directory, mail spool, etc)
 	
 	adduser - The interactive shell
 	
