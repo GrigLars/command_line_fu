@@ -3,7 +3,7 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### telnet exit
 
-If you need to escape linux telnet, you hit **control** + **[** which is the escape key.  But you can also change it at the command prompt like:
+If you need to escape linux telnet, you hit **control** + **]** which is the escape key "^]".  But you can also change it at the command prompt like:
 
     telnet -e Q 192.168.0.1 25 
     
