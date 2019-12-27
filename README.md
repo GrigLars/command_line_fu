@@ -1,6 +1,14 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### telnet exit
+
+If you need to escape linux telnet, you hit **control** + **[** which is the escape key.  But you can also change it at the command prompt like:
+
+    telnet -e Q 192.168.0.1 25 
+    
+Which would set the escape to "Q" 
+
 #### kwallet issues
 
 I kept getting errors in KDE/sddm a.k.a. Kubuntu that would pop up two dialoge boxes that said:
