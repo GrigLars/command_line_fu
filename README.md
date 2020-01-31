@@ -1,6 +1,12 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### colorize log output
+
+There is a program ccze (not a default install) which replaces colorize but is much faster.  Sadly, it doesn't page by default, so you have to modify the output to ascii and pipe it to less like so:
+
+    ccze -A < /mnt/log/mail.log | less -R
+
 #### remove trailing whitespace
 
 The programs ansible-lint and git hate trailing whitespace, so often I have to remove them from a file with
