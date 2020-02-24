@@ -468,7 +468,7 @@ More of these escape sequences can be listed with [Enter] [~] [?]
 
 	sed -e "s/.*Alex.*/###########/" deleteme.txt
 
-#### How to I write to dev null again? Fucking hate crontab reports.
+#### How to I write to dev null again? I always screw the order up in crontab reports.
 
 	[command] > /dev/null 2>&1
 	
