@@ -1,6 +1,30 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Some cool hardware reading tricks
+
+What does this box have?  I knew a lot like dmidecde, dmesg, and kernel logs, but there are some new ones:
+
+    dd if=/dev/mem bs=1k skip=768 count=256 2>/dev/null | strings -n 8  # Read BIOS settings
+    lspci -tv                          					# Show PCI devices
+    lsusb -tv                          					# Show USB devices
+    lshal                              					# Show a list of all devices with their properties
+    lsdev                              					# information about installed hardware
+
+#### How do I prevent a cron job from running over itself if it takes too long?
+
+Use flock (part of the util-linux or flock suite of tools depending on distro).
+
+    $ crontab -l
+    * * * * * /usr/bin/flock -w 0 /path/to/cron.lock /usr/bin/php /path/to/cron.php
+
+You can also use fuser to see who and what are using them
+
+	$ fuser -v /path/to/cron.lock
+			     USER        PID ACCESS COMMAND
+	cron.lock:           root       7836 f.... flock
+			     root       7837 f.... php
+
 #### colorize log output
 
 There is a program ccze (not a default install) which replaces colorize but is much faster.  Sadly, it doesn't page by default, so you have to modify the output to ascii and pipe it to less like so:
