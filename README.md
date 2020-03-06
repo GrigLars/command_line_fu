@@ -5,11 +5,13 @@ These are just notes for command line stuff I have learned over the years: short
 
 What does this box have?  I knew a lot like dmidecde, dmesg, and kernel logs, but there are some new ones:
 
-    dd if=/dev/mem bs=1k skip=768 count=256 2>/dev/null | strings -n 8  # Read BIOS settings
-    lspci -tv                          					# Show PCI devices
-    lsusb -tv                          					# Show USB devices
-    lshal                              					# Show a list of all devices with their properties
-    lsdev                              					# information about installed hardware
+    # Read BIOS settings
+    dd if=/dev/mem bs=1k skip=768 count=256 2>/dev/null | strings -n 8  
+    
+    lspci -tv		# Show PCI devices
+    lsusb -tv		# Show USB devices
+    lshal    		# Show a list of all devices with their properties
+    lsdev   		# information about installed hardware
 
 #### How do I prevent a cron job from running over itself if it takes too long?
 
