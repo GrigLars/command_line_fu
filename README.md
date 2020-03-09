@@ -1,6 +1,10 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Ah, crap, I didn't mean to type that long command yet, but I don't want to retype it
+
+You can his *alt+shift+3* which will put a "#" comment in front of it so you can go back to it later in your bash history
+
 #### Some cool hardware reading tricks
 
 What does this box have?  I knew a lot like dmidecde, dmesg, and kernel logs, but there are some new ones:
