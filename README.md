@@ -1,6 +1,13 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### How to show “Hybrid” line numbers in Vim
+
+	set number
+	set relativenumber
+	
+You can also put the following two config directives in ~/.vimrc
+
 #### For Excel or CSV files
 
 **csvkit** provides in2csv, csvcut, csvjoin, csvgrep, etc.
