@@ -1,6 +1,28 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### How to measure GPU and CPU temp on a Raspberry Pi
+
+Why was this so hard to find?
+
+    vcgencmd measure_temp
+    cat /sys/class/thermal/thermal_zone0/temp
+
+#### More on stdout and stderr
+
+After the post below, I needed a reminder when I look at this page again.
+
+    Handle	Name	Description
+    0   	stdin	Standard input
+    1	        stdout	Standard output
+    2   	stderr	Standard error
+
+    command &>file 		# ... OR
+    command > file-name 2>&1    # ... pipes both stdout and stderr in a file
+    command 2>&1 | less		# ... it can also be piped
+    
+    command 2> error.logr.log 	# put only stderr in a log
+
 #### How to grep docker logs
 
 This just seems super annoying, but you have to push all the output to stdout, then grep it, like this example [-f is otional "follow" which I use more often than not]:
