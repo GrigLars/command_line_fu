@@ -14,7 +14,7 @@ After the post below, I needed a reminder when I look at this page again.
 
     Handle	Name	Description
     0   	stdin	Standard input
-    1	        stdout	Standard output
+    1   	stdout	Standard output
     2   	stderr	Standard error
 
     command &>file 		# ... OR
