@@ -17,11 +17,18 @@ After the post below, I needed a reminder when I look at this page again.
     1   	stdout	Standard output
     2   	stderr	Standard error
 
-    command &>file 		# ... OR
-    command > file-name 2>&1    # ... pipes both stdout and stderr in a file
-    command 2>&1 | less		# ... it can also be piped
+    command &>file		# ... OR
+    command > file-name 2>&1	# ... pipes both stdout and stderr in a file
+    command 2>&1 | less		# ... it can also be piped            
     
     command 2> error.logr.log 	# put only stderr in a log
+            
+You can also pipe both standard output and standard error into the next stage of the pipeline like this:
+
+	if doesnotexist |& grep 'command not found' >/dev/null
+	then
+	  echo "oops"
+	fi
 
 #### How to grep docker logs
 
