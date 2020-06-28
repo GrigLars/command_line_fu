@@ -1,6 +1,23 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Put your last long command in your editor
+
+Sometimes, you have a long command that you need to edit by hand or swap some stuff out.  Like say you had 
+
+	ansible-playbook -T 60 --extra-vars="foo=bar bar=baz xyzzy=plugh" install-rsyslog-client.yml --vault-password-file=~/.ssh/vault_pass -l manny,mo,jack,cecil,beany,potato1,orangepi1,yakko,rpi-*
+	
+and the next command, substitute a lot of stuff no easy in one command, run:
+
+	fc
+	
+It will open up that command in your DEFAULT text editor. What, it's crummy old nano?  Change it to vim.  Open the .bashrc file, and replace both occurrences of program with the editor you want to set as the default editor:
+
+	export EDITOR='vim'
+	export VISUAL='vim'
+	
+Save and reload with "source .basrc"
+
 #### How to measure GPU and CPU temp on a Raspberry Pi
 
 Why was this so hard to find?
@@ -794,7 +811,7 @@ and so on.  This way, the tab completion will include your username prefix. And 
 
 and again, be careful with the quotes and back-ticks.
 
-#### READ LINES WITH SPACES AND SHIT
+#### READ LINES WITH SPACES AND STUFF
     
     #!/bin/bash
     file="/home/glarson/list-o-servers.txt"
