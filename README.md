@@ -3,9 +3,9 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### Check what SSL/TLS client connection you get
 
-This is helpful to find the highest level
+This is helpful to find the highest level of TLS that you support.
 
-	openssl s_client -connect [domain]:443 -[tls1/tls1_1/tls1_2]
+	openssl s_client -connect [domain]:443 -[tls1/tls1_1/tls1_2/tls1_3]
 
 #### Put your last long command in your editor
 
