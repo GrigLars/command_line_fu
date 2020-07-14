@@ -1,6 +1,12 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Check what SSL/TLS client connection you get
+
+This is helpful to find the highest level
+
+	openssl s_client -connect [domain]:443 -[tls1/tls1_1/tls1_2]
+
 #### Put your last long command in your editor
 
 Sometimes, you have a long command that you need to edit by hand or swap some stuff out.  Like say you had 
