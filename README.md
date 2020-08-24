@@ -1,6 +1,10 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Am I running Raspbian 32 bit or 64 bit?
+
+Run "uname -m" to confirm. If it says aarch64 then it is 64 bit. If it says armv7l then it is 32 bit.  If it says armv61, it's also 32 bit.
+
 #### Check what SSL/TLS client connection you get
 
 This is helpful to find the highest level of TLS that you support.
