@@ -1,6 +1,22 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### How to List All Running Services Under systemd 
+
+    sudo systemctl --type=service
+    sudo systemctl list-units --type=service
+    sudo systemctl --type=service --state=active
+    sudo systemctl --type=service --state=running
+    
+Your best bet is to run this as an alias:
+
+    alias sys_active='sudo systemctl --type=service --state=active'
+    alias sys_run='sudo systemctl --type=service --state=running'
+
+#### How to run a command for a certain length of time
+
+    timeout 8s ping 192.168.1.1
+
 #### Am I running Raspbian 32 bit or 64 bit?
 
 Run "uname -m" to confirm. If it says aarch64 then it is 64 bit. If it says armv7l then it is 32 bit.  If it says armv61, it's also 32 bit.
