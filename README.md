@@ -1,6 +1,8 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+
+
 #### How to List All Running Services Under systemd 
 
     sudo systemctl --type=service
@@ -101,11 +103,11 @@ What does this box have?  I knew a lot like dmidecde, dmesg, and kernel logs, bu
     # Read BIOS settings
     dd if=/dev/mem bs=1k skip=768 count=256 2>/dev/null | strings -n 8  
     
-    lspci -tv		# Show PCI devices
-    lsusb -tv		# Show USB devices
-    lshal    		# Show a list of all devices with their properties
-    lsdev   		# Information about installed hardware (procinfo has to be installed)
-    lshw		# Information about installed hardware
+    lspci -tv    # Show PCI devices
+    lsusb -tv    # Show USB devices
+    lshal        # Show a list of all devices with their properties
+    lsdev        # Information about installed hardware (procinfo has to be installed)
+    lshw         # Information about installed hardware
 
 #### How do I prevent a cron job from running over itself if it takes too long?
 
