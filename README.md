@@ -104,7 +104,8 @@ What does this box have?  I knew a lot like dmidecde, dmesg, and kernel logs, bu
     lspci -tv		# Show PCI devices
     lsusb -tv		# Show USB devices
     lshal    		# Show a list of all devices with their properties
-    lsdev   		# information about installed hardware
+    lsdev   		# Information about installed hardware (procinfo has to be installed)
+    lshw		# Information about installed hardware
 
 #### How do I prevent a cron job from running over itself if it takes too long?
 
