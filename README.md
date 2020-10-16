@@ -1,6 +1,30 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Update and remove all stale vagrant boxes
+To update all your vagrant boxes:
+
+    vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done
+    
+To update and prune all your outdated boxes, even ones in use:
+
+    vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done && vagrant box prune -f
+    
+I have a lot of aliases for vagrant because I use it a LOT:
+
+    alias vagpro='vagrant provision'
+    alias vagredo='vagrant destroy -f && vagrant up'
+    alias vagrm='vagrant destroy -f'
+    alias vagssh='vagrant ssh'
+    alias vagstat='vagrant global-status'
+    alias vagupdate='vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done'
+    alias vagtrim='vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done && vagrant box prune -f'
+    alias vagwho='vagrant global-status'
+    alias vgdn='vagrant halt'
+    alias vgdown='vagrant halt'
+    alias vgssh='vagrant ssh'
+    alias vgup='vagrant up'
+    
 #### Searching for all active crontab jobs
 I have found myself in multiple jobs trying to figure out all kinds of cron jobs that are not standardized when I take over a server. Are they in /etc/crontab? Running as a crontab of a user? Something in one of the hours jobs? I developed these four lines of code to find them quickly.
 
