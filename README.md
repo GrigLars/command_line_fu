@@ -7,11 +7,11 @@ I have found myself in multiple jobs trying to figure out all kinds of cron jobs
     # Any active jobs in /etc/crontab
       grep -v "^#\|^$" /etc/crontab
     # Any active jobs in the timed directories
-      for foo in hourly daily weekly monthly; do echo "==== $foo>"; ls /etc/cron.$foo; done
+      for foo in hourly daily weekly monthly; do echo "==== Cron directory $foo>"; ls /etc/cron.$foo; done
     # Any active jobs in the cron.d directory
       ls /etc/cron.d/*   # grep -v "^#\|^$"
     # Any cron jobs in user crontabs
-      for foo in $(ls /var/spool/cron/crontabs/*); do echo "==== $foo>"; grep -v "^#\|^$" $foo; done
+      for foo in $(ls /var/spool/cron/crontabs/*); do echo "==== User Crontab $foo>"; grep -v "^#\|^$" $foo; done
 
 #### How to List All Running Services Under systemd 
 
