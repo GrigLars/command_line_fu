@@ -1,7 +1,17 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Searching for all active crontab jobs
+I have found myself in multiple jobs trying to figure out all kinds of cron jobs that are not standardized when I take over a server. Are they in /etc/crontab? Running as a crontab of a user? Something in one of the hours jobs? I developed these four lines of code to find them quickly.
 
+    # Any active jobs in /etc/crontab
+      grep -v "^#\|^$" /etc/crontab
+    # Any active jobs in the timed directories
+      for foo in hourly daily weekly monthly; do echo "==== $foo>"; ls /etc/cron.$foo; done
+    # Any active jobs in the cron.d directory
+      ls /etc/cron.d/*   # grep -v "^#\|^$"
+    # Any cron jobs in user crontabs
+      for foo in $(ls /var/spool/cron/crontabs/*); do echo "==== $foo>"; grep -v "^#\|^$" $foo; done
 
 #### How to List All Running Services Under systemd 
 
