@@ -17,8 +17,8 @@ I have a lot of aliases for vagrant because I use it a LOT:
     alias vagrm='vagrant destroy -f'
     alias vagssh='vagrant ssh'
     alias vagstat='vagrant global-status'
-    alias vagupdate='vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done'
-    alias vagtrim='vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done && vagrant box prune -f'
+    alias vagupdate="vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done"
+    alias vagtrim="vagrant box list | while read line; do BOX=$(echo $line | awk '{print $1}'); vagrant box update --box $BOX; done && vagrant box prune -f"
     alias vagwho='vagrant global-status'
     alias vgdn='vagrant halt'
     alias vgdown='vagrant halt'
