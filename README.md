@@ -3,11 +3,11 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### Have bash determine what quotes to use
 
-    slartibartfast@localhost:~$ # "Nothing's worth more than $20," according to Jim.
-    slartibarfast@localhost:~$ !:q
+    $ # "Nothing's worth more than $20," according to Jim.
+    $ !:q
     '# "Nothing'\''s worth more than $20," according to Jim.'
 
-    slartibartfast@localhost:~$ echo '# "Nothing'\''s worth more than $20," according to Jim.'
+    $ echo '# "Nothing'\''s worth more than $20," according to Jim.'
     # "Nothing's worth more than $20," according to Jim.
 
 #### Update and remove all stale vagrant boxes
