@@ -1,6 +1,15 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Have bash determine what quotes to use
+
+    slartibartfast@localhost:~$ # "Nothing's worth more than $20," according to Jim.
+    slartibarfast@localhost:~$ !:q
+    '# "Nothing'\''s worth more than $20," according to Jim.'
+
+    slartibartfast@localhost:~$ echo '# "Nothing'\''s worth more than $20," according to Jim.'
+    # "Nothing's worth more than $20," according to Jim.
+
 #### Update and remove all stale vagrant boxes
 To update all your vagrant boxes:
 
@@ -783,6 +792,28 @@ Extract text in round brackets:
 	$ TEMP="${VAR##*\(}"
 	$ echo "${TEMP%\)}"
 	enemy
+	
+Set a default value if variable undefined or null
+
+	$ echo ${VAR:-sushi}
+	sushi
+	$ VAR=sashimi; echo ${VAR:-sushi}
+	sashimi
+
+Give an error if a variable is undefined or null
+
+	$ echo ${VAR:?wtf null error}
+	bash: VAR: wtf null error
+	$ VAR=cookie;echo ${VAR:?wtf null error}
+	cookie
+
+Remove a prefix or a suffix of a pattern FROM a variable
+
+	$ x=shark.png
+	$ echo ${x%.png}
+	shark
+	$ echo ${x#shark}
+	.png
 
 #### Enable PCRE to group in grep
 
