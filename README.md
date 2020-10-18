@@ -1,6 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### How to connect to an ansible host NOT in inventory (yet)
+Surprisingly, the trick is to append a comma (,) 
+
+    # Host and IP address
+    ansible all -i example.com,
+    ansible all -i 93.184.216.119,
+
+    # Requires 'hosts: all' in your playbook
+    ansible-playbook -i example.com, playbook.yml
+
 #### Have bash determine what quotes to use
 
     $ # "Nothing's worth more than $20," according to Jim.
@@ -948,5 +958,4 @@ and again, be careful with the quotes and back-ticks.
     sudo swapon /swapfile
     sudo echo "/swapfile none  swap  sw 0  0" >> /etc/fstab
     sudo echo "vm.swappiness=50" >> /etc/sysctl.conf
-    
-    
+       
