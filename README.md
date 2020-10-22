@@ -1,6 +1,20 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Move files with ad-hoc web server
+
+    python3 -m http.server [port number]
+    wget http://<hostip>:[port number]/filename
+    
+Launch the web server [default port 8000] and transfer files that way.  Note: only do this on private networks. 
+
+#### Read JSON files in a sane way
+
+    cat test.json | python -mjson.tool
+    cat test.json | jq
+    
+Note, either python or jq have to be installed, respecively. 
+
 #### How to connect to an ansible host NOT in inventory (yet)
 Surprisingly, the trick is to append a comma (,) 
 
