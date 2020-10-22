@@ -508,24 +508,33 @@ Get list of vms/running vms:
 
 #### Command line shortcuts 
 
-    CTRL+U : cut everything before pointer
-    CTRL+K : cut everything after pointer
-    CTRL+A : Go the beginning of line
-    CTRL+E: go to end of line
-    CTRL+left/right arrow : Go to beginning of word
+    CTRL+T : transpose the character before the cursor with the one under the cursor, press Esc + t to transposes the two words before the cursor.
+    CTRL+X+backspace : delete all text from the beginning of line to the cursor.
 
-    CTRL+W : delete word before pointer
-    CTRL+Y : paste erased
-    CTRL+D : exit
-    CTRL+C : SIGTERM
-    CTRL+R : Search history
+    CTRL+A : move to the beginning of line.
     CTRL+B : move back one character
+    CTRL+D : if you've type something, Ctrl + d deletes the character under the cursor, else, it escapes the current shell.
+    CTRL+N : same as Down arrow.
+    CTRL+P : same as Up arrow.
+    CTRL+E : move to the end of line.
     CTRL+F : move forward one character
     CTRL+I : insert a tab
+    CTRL+K : cut everything after pointer
+    CTRL+K : delete all text from the cursor to the end of line.
+    CTRL+U : cut everything before pointer
+    CTRL+W : delete word before pointer
+    CTRL+Y : paste erased
+    CTRL+_ : undo typing.
     CTRL+insert : copy
+    CTRL+left/right arrow : Go to beginning of word
     SHIFT+insert: paste
-    ALT+B : move back one word
-    ALT+F : move forward one word
+
+    CTRL+C : SIGTERM
+    CTRL+L : redraw screen (helpful if something messes up formatting)
+    CTRL+S : to stop output to terminal.
+    CTRL+Q : to resume output to terminal after CTRL+S
+
+    CTRL+R : Search history
 
 #### Gives you vi functionality on the command line.
 
