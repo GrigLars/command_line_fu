@@ -1,6 +1,11 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Substitute command output for files
+You can substitute commands for files using parentheses.  For example:
+
+    diff <(ls Directory/*.png) <(ls Backups/*.png)
+    
 #### Move files with ad-hoc web server
 
     python3 -m http.server [port number]
