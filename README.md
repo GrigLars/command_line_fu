@@ -1,6 +1,17 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Getting keys and values from bash associative arrays
+The keys are accessed using an exclamation point: ${!array[@]}, the values are accessed using ${array[@]}.
+
+    for i in "${!array[@]}" 
+    do
+      echo "key  : $i"
+      echo "value: ${array[$i]}"
+    done
+
+In standard bash arrays, ${!array[@]} will list indecies, like 0 1 2 ..*n* 
+
 #### Substitute command output for files
 You can substitute commands for files using parentheses.  For example:
 
