@@ -1,6 +1,13 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Using awk to show lines that have a match in a column ####
+
+Suppose you have an output with columns, and the first, second, or nth column has a match you're looking for, and if that column matches, you print the entire line.  You can use awk, which is designed for this:
+
+    awk '$2 == "LINUX" { print $0 }' test.txt	# Show lines that have LINUX in the second column
+    iptables -vL | awk '$1 > 0 { print $0 }'	# Show output of IP tables when the first column (packet hits) is greater than zero
+    
 #### Regex for email and ip addresses
 
     grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" email_log.log
