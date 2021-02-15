@@ -1,6 +1,15 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Changing your sudoers file to lecture differently ####
+
+You can change the message you get when someone logs into sudo.  Set lecture=always, never, or once and the message can be set to a text file
+
+    Defaults    lecture=once,lecture_file=/etc/sudo_lecture.txt
+    # sudo --reset-timestamp # To reset this "once"
+    Defaults 	insults
+    # You can insult people who get the sudo password wrong, too
+
 #### Using awk to show lines that have a match in a column ####
 
 Suppose you have an output with columns, and the first, second, or nth column has a match you're looking for, and if that column matches, you print the entire line.  You can use awk, which is designed for this:
