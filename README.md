@@ -1,6 +1,24 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Removing files over X days old ####
+
+    find /path/to/files* -mtime +5 -exec rm -i {} \;
+
+In this case, 5. Note that there are spaces between rm, {}, and \; and I put an -i for safety in case one cut and pastes. I then hand-fix it to -rf or -r depending on what I need.  Often I am removing log files over 60 days old to save space on really small systems. 
+
+If you are dealing with files, the difference is between mtime, ctime and atime is:
+
+* atime _"access time,"_ is updated when the file's contents are read by an application or a command such as less, grep, or cat.
+* ctime _"change time,"_ is when the file's property changes. It will always be changed when the mtime changes, but also when you change the file's permissions, name or location.
+* mtime _"modification time,"_ is when the file was last modified. When you change the contents of a file, its mtime changes.
+
+The easiest way to remember which is which is to read their alphabetical order:
+
+* *A*time can be updated alone
+* *C*time will update atime
+* *M*time will update both atime and ctime.
+
 #### Changing your sudoers file to lecture differently ####
 
 You can change the message you get when someone logs into sudo.  Set lecture=always, never, or once and the message can be set to a text file
