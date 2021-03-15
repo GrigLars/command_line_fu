@@ -5,7 +5,7 @@ These are just notes for command line stuff I have learned over the years: short
 
     adduser --shell /bin/bash --disabled-password jenkins
 
-#### Quick Guide to expanding disk size on vmware ####
+#### Quick Guide to expanding disk size on VMware with Debian/Ubuntu ####
 
 This assumes that the first disk is **/dev/sda**, and you're adding a third **[3]** partition
 
