@@ -1,6 +1,27 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Adding a user with no password ####
+
+    adduser --shell /bin/bash --disabled-password jenkins
+
+#### Quick Guide to expanding disk size on vmware ####
+
+This assumes that the first disk is **/dev/sda**, and you're adding a third **[3]** partition
+
+- Power off the virtual machine
+- Extend the virtual disk size
+- Power on machine
+- sudo fdisk /dev/sda
+- p,n,p,3[probably],[enter][enter],t,3[probably],8e[LVM type],w
+- Restart machine
+- sudo pvcreate /dev/sda3
+- sudo vgextend vgubuntu /dev/sda3
+- sudo vgdisplay vgubuntu | grep "Free"
+- sudo lvextend -L+##G /dev/vgubuntu/root [where ## is the GB size from previous step]
+- sudo resize2fs /dev/vgubuntu/root
+- Pray
+
 #### Removing files over X days old ####
 
     find /path/to/files* -mtime +5 -exec rm -i {} \;
