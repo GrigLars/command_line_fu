@@ -1,26 +1,55 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Visual readout of processes ####
+
+I had an issue where I had to keep an eye out for runaway php processes, and have a more visual way to eyeball it on another screen.  I whipped up this little one-liner to show me the number of php proccesses every 10 seconds:
+
+    while true; do date | tr -d '\n'; foo=$(nice ps aux | grep php | wc -l);\
+    echo -n " :: $foo"; printf '%*s' $foo | tr ' ' '*'; echo; sleep 10; done
+
+This prints out a crude bar graph:
+
+    Fri Apr 16 12:41:51 UTC 2021 :: 10**********
+    Fri Apr 16 12:42:01 UTC 2021 :: 11***********
+    Fri Apr 16 12:42:11 UTC 2021 :: 26**************************
+    Fri Apr 16 12:42:21 UTC 2021 :: 27***************************
+    Fri Apr 16 12:42:31 UTC 2021 :: 27***************************
+    Fri Apr 16 12:42:41 UTC 2021 :: 26**************************
+    Fri Apr 16 12:42:51 UTC 2021 :: 15***************
+    Fri Apr 16 12:43:01 UTC 2021 :: 12************
+    Fri Apr 16 12:43:11 UTC 2021 :: 10**********
+    Fri Apr 16 12:43:21 UTC 2021 :: 10**********
+
+
 #### Adding a user with no password ####
 
     adduser --shell /bin/bash --disabled-password jenkins
 
-#### Quick Guide to expanding disk size on VMware with Debian/Ubuntu ####
+#### Quick Guide to expanding disk size on VMware with Debian/Ubuntu and hoping it's using LVM ####
 
-This assumes that the first disk is **/dev/sda**, and you're adding a third **[3]** partition
+This assumes that the first disk is **/dev/sda**, and you're adding a third **[3]** partition and using LVM
 
 - Power off the virtual machine
 - Extend the virtual disk size
 - Power on machine
-- sudo fdisk /dev/sda
+- ```sudo fdisk /dev/sda```
 - p,n,p,3[probably],[enter][enter],t,3[probably],8e[LVM type],w
 - Restart machine
-- sudo pvcreate /dev/sda3
-- sudo vgextend vgubuntu /dev/sda3
-- sudo vgdisplay vgubuntu | grep "Free"
-- sudo lvextend -L+##G /dev/vgubuntu/root [where ## is the GB size from previous step]
-- sudo resize2fs /dev/vgubuntu/root
+- ```sudo pvcreate /dev/sda3```
+- ```sudo vgextend vgubuntu /dev/sda3```
+- ```sudo vgdisplay vgubuntu | grep "Free"```
+- ```sudo lvextend -L+##G /dev/vgubuntu/root``` [where ## is the GB size from previous step]
+- ```sudo resize2fs /dev/vgubuntu/root```
 - Pray
+
+#### Quick Guide to expanding disk size on AWS with Debian/Ubuntu [LVM not needed] ####
+
+- Expend the EBS in the console or ```aws ec2 modify-volume --size 150 --volume-id vol-1234567890abcdef0``` where 150 is the size in GB
+- Then ssh into the instance, check with ```sudo lsblk``` and ```df -h```
+- ```sudo growpart /dev/xvda 1``` where xvda is the disk volume (not partition) parition 1
+- ```sudo resize2fs /dev/xvda1``` where xvda1 is the partition you expanded above
+- Paryer not needed
 
 #### Removing files over X days old ####
 
