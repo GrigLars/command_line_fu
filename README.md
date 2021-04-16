@@ -1,6 +1,11 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Quick mount of a samba/smb/cifs share ####
+
+    sudo mount -t cifs //diskstation.int.local/Fortran /media/diskstation/fortran -o user=cforrester
+    passwd: ****************
+
 #### Visual readout of processes ####
 
 I had an issue where I had to keep an eye out for runaway php processes, and have a more visual way to eyeball it on another screen.  I whipped up this little one-liner to show me the number of php proccesses every 10 seconds:
