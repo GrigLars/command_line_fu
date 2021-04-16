@@ -43,13 +43,13 @@ This assumes that the first disk is **/dev/sda**, and you're adding a third **[3
 - ```sudo resize2fs /dev/vgubuntu/root```
 - Pray
 
-#### Quick Guide to expanding disk size on AWS with Debian/Ubuntu [LVM not needed] ####
+#### Quick Guide to expanding EBS disk size on AWS with Debian/Ubuntu [LVM not needed] ####
 
 - Expend the EBS in the console or ```aws ec2 modify-volume --size 150 --volume-id vol-1234567890abcdef0``` where 150 is the size in GB
 - Then ssh into the instance, check with ```sudo lsblk``` and ```df -h```
-- ```sudo growpart /dev/xvda 1``` where xvda is the disk volume (not partition) parition 1
-- ```sudo resize2fs /dev/xvda1``` where xvda1 is the partition you expanded above
-- Paryer not needed
+- ```sudo growpart /dev/xvda 1``` where xvda 1 [note the space] is the disk volume, parition 1
+- ```sudo resize2fs /dev/xvda1``` where xvda1 [no space] is the partition you expanded above
+- Prayer not needed
 
 #### Removing files over X days old ####
 
