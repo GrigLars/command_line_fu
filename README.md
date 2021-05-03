@@ -106,7 +106,12 @@ The keys are accessed using an exclamation point: `${!array[@]}`, the values are
 
 In standard bash arrays, `${!array[@]}` will list indecies, like 0 1 2 ..*n* 
 
-#### Substitute command output for files
+#### How to make a sudoer be able to sudo with no password
+If you create a file in `/etc/sudoers.d/<username>` and understand that this is a vulnerability you need to secure HARD... add the line:
+
+    <username> ALL=(ALL) NOPASSWD:ALL
+
+#### You can substitute command output for files
 You can substitute commands for files using parentheses.  For example:
 
     diff <(ls Directory/*.png) <(ls Backups/*.png)
