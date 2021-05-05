@@ -999,6 +999,15 @@ To view the key size from a certificate:
 	openssl x509 -noout -modulus -in /etc/ssl/certs/example.crt | openssl md5;\
 	openssl rsa -noout -modulus -in /etc/ssl/private/example.key | openssl md5
 
+#### Get expiration of certificate for various protocols: file, https, pop3, imap, smtps, starttls
+
+	openssl x509 -noout -in server_file.crt -enddate
+	echo | openssl s_client -servername https_hostname.com -connect hostname.com:443 2>/dev/null | openssl x509 -noout -enddate
+	echo | openssl s_client -connect pop3_hostname.com:995 2>/dev/null | openssl x509 -noout -enddate
+	echo | openssl s_client -connect imap_hostname.com:993 2>/dev/null | openssl x509 -noout -enddate
+	echo | openssl s_client -connect smtps_hostname.com:465 2>/dev/null | openssl x509 -noout -enddate
+	echo | openssl s_client -starttls smtp -connect starttls_hostname.com:587 2>/dev/null | openssl x509 -noout -enddate
+	
 
 #### Print out separate colors for each output	
 
