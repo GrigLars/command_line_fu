@@ -1,6 +1,22 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Making a RAM disk to install an entire OS guest into memory
+
+Sometimes I am just testing an new concept or distro, and I install in directly to RAM.  
+
+    sudo mkdir /tmp/ramdisk
+    sudo mount -t tmpfs -o size=12G vmramdisk /tmp/ramdisk
+    mount | tail -n 1
+    
+Then I set the install directory to /tmp/ramdisk, play with it, then destroy it. If I need the RAM back, I can just unmount it.
+
+    sudo umount /tmp/ramdisk/
+
+Or make the RAM disk permenant and persistent (athough data will be wiped between reboots).
+
+    vmramdisk  /tmp/ramdisk  tmpfs  defaults,size=1G,x-gvfs-show  0  0    
+
 #### Quick mount of a samba/smb/cifs share ####
 
     sudo mount -t cifs //diskstation.int.local/Fortran /media/diskstation/fortran -o user=cforrester
