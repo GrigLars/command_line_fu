@@ -3,7 +3,7 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### Making a RAM disk to install an entire OS guest into memory
 
-Sometimes I am just testing an new concept or distro, and I install in directly to RAM.  
+Sometimes I am just testing an new concept or distro, and I install in directly to RAM. RAM is cheap tese days, and why clutter my hard drive and wear down my SSD with files I am gonna delete right away, anyway?
 
     sudo mkdir /tmp/ramdisk
     sudo mount -t tmpfs -o size=12G vmramdisk /tmp/ramdisk
@@ -15,7 +15,7 @@ Then I set the install directory to /tmp/ramdisk, play with it, then destroy it.
 
 Or make the RAM disk permenant and persistent (athough data will be wiped between reboots).
 
-    vmramdisk  /tmp/ramdisk  tmpfs  defaults,size=1G,x-gvfs-show  0  0    
+    vmramdisk  /tmp/ramdisk  tmpfs  defaults,size=12G,x-gvfs-show  0  0    
 
 #### Quick mount of a samba/smb/cifs share ####
 
