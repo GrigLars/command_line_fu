@@ -1,6 +1,14 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Find your IP on the command line
+
+	curl ifconfig.me
+	curl -4/-6 icanhazip.com
+	curl ipinfo.io/ip
+	curl api.ipify.org
+	curl checkip.dyndns.org
+
 #### Making a RAM disk to install an entire OS guest into memory
 
 Sometimes I am just testing an new concept or distro, and I install in directly to RAM. RAM is cheap tese days, and why clutter my hard drive and wear down my SSD with files I am gonna delete right away, anyway?
