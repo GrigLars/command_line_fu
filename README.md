@@ -409,7 +409,10 @@ Sometimes you get a weird box that doesn't want to or just can't install guest a
 For those times you want to weed out time stamps, this will print all but two first columns:
 
     awk '{$1=$2=""; print $0}' somefile
+    
+Find the index where you want to start printing (index of $5 in $0) and print the substring of $0 starting at that index.
 
+    awk '{print substr($0,index($0,$5))}' fileName
 
 #### Some git stuff I forget
 
