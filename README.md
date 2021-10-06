@@ -994,6 +994,14 @@ Remove a prefix or a suffix of a pattern FROM a variable
 	$ echo ${x#shark}
 	.png
 
+Find in a variable if it contains substring
+
+        mystring='My string';
+        if [[ $mystring =~ "My" ]]; then
+            echo "It's there!"
+        fi
+
+
 #### Enable PCRE to group in grep
 
 	tail -f application.log | grep -i -P "(error|warning|failure)"
