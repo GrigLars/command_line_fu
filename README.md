@@ -1145,3 +1145,6 @@ and again, be careful with the quotes and back-ticks.
     sudo echo "/swapfile none  swap  sw 0  0" >> /etc/fstab
     sudo echo "vm.swappiness=50" >> /etc/sysctl.conf
        
+Some links:
+- https://tldp.org/LDP/abs/html/refcards.html
+- https://wiki.bash-hackers.org/syntax/pe
