@@ -84,6 +84,13 @@ This assumes that the first disk is **/dev/sda**, and you're adding a third **[3
 - ```sudo resize2fs /dev/xvda1``` where xvda1 [no space] is the partition you expanded above
 - Prayer not needed
 
+#### Quick Guide to expanding EBS disk size on AWS with Debian/Ubuntu with XFS ####
+- Expend the EBS in the console or ```aws ec2 modify-volume --size 150 --volume-id vol-1234567890abcdef0``` where 150 is the size in GB
+- Then ssh into the instance, check with ```sudo lsblk``` and ```df -h```
+- ```xfs_growfs /mnt``` where /mnt is the mounted disk volume
+- ```xfs_fsr``` to optimize
+Note: AWS takes a LONG time to optimize from the EBS, and depending on size, may not be done for several hours to half a day. 
+
 #### Removing files over X days old ####
 
     find /path/to/files* -mtime +5 -exec rm -i {} \;
