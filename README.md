@@ -73,7 +73,7 @@ This assumes that the first disk is **/dev/sda**, and you're adding a third **[3
 - ```sudo vgextend vgubuntu /dev/sda3```
 - ```sudo vgdisplay vgubuntu | grep "Free"```
 - ```sudo lvextend -L+##G /dev/vgubuntu/root``` [where ## is the GB size from previous step]
-- ```sudo resize2fs /dev/vgubuntu/root```
+- ```sudo resize2fs /dev/vgubuntu/root``` [use ext2online if resize2fs gives an error about live filesystems]
 - Pray
 
 #### Quick Guide to expanding EBS disk size on AWS with Debian/Ubuntu [LVM not needed] ####
