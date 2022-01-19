@@ -1021,6 +1021,17 @@ Find in a variable if it contains substring
 
 	rsync -WavP --human-readable --progress
 
+#### Generate various SSL certificate, when a CSR has to be sent to a signing authority:
+
+Regular cert:
+
+    foo=example.com; openssl req -new -newkey rsa:2048 -nodes -out "$foo.csr" -keyout "$foo.key" -subj "/C=US/ST=YourState/L=Your City/O=Company Name/CN=$foo"
+
+Wildstar cert:
+
+     foo=example.com; openssl req -new -newkey rsa:2048 -nodes -out "star_$foo.csr" -keyout "star_$foo.key" -subj "/C=US/ST=YourState/L=Your City/O=Company Name/CN=*.$foo"
+
+
 #### This is a quick step to generate self-signed certificate :
 
 	openssl genrsa 2048 > host.key
