@@ -1030,7 +1030,7 @@ Regular cert:
     -keyout "$foo.key" \
     -subj "/C=US/ST=YourState/L=Your City/O=Company Name/CN=$foo"
 
-Wildstar cert:
+Wildcard cert:
 
      foo=example.com; \
      openssl req -new -newkey rsa:2048 -nodes -out "star_$foo.csr" \
