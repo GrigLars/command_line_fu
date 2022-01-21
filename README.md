@@ -1,6 +1,26 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Base64 obfuscation 
+
+Something near and dear to my heart is the openness of sharing ideas, discoveries, and code. One of my pet peeves is, every once in a while, a sysadmin or coder comes along that doesn't weant to share. They use basic ways to make their code unreadable on purpose, to secure their jobs, hide the fact what they don't know for better coders, and just to be a jerk. This is something I ran into years ago, and I thought about making it a separate page, but meh.  Say you have a script, `ten.sh`:
+
+    #!/usr/bin/env bash
+    echo "This is a bunch of numbers"
+    for foo in $(seq 1 10); do echo -n "$foo - "; done
+
+If you don't want people to see what that script is doing, you can do this:
+
+    echo '#!/usr/bin/env bash' > secret_ten.sh && echo "echo '$(base64 ten.sh)' | base64 -d | sh" >> secret_ten.sh
+    
+If you `cat secret_ten.sh` you will get this:
+
+    #!/usr/bin/env bash
+    echo 'IyEvdXNyL2Jpbi9lbnYgYmFzaAplY2hvICJUaGlzIGlzIGEgYnVuY2ggb2YgbnVtYmVycyIKZm9y
+    IGZvbyBpbiAkKHNlcSAxIDEwKTsgZG8gZWNobyAtbiAiJGZvbyAtICI7IGRvbmUK' | base64 -d | sh
+
+And you can still run it.  If you want to see what that hash is, just edit `secret_ten.sh` and remove the `| sh` at the end.  There are "more secure" ways to make this even harder to decode, but I don't want to encourage this behavior. I have some advice for people who do this, and things like it, to "secure their jobs."  I have seen so many sysadmins and coders get let go anyway, either because they are not as valuable as they thought they were, or get let go by management who doesn't even know their value, no matter how obvious or stubborn you are.  All you're doing is making it hard for other coders down the line. And you might think, "well, who cares about them, I'm oput of a job," and you're part of the problem, I'm afraid.
+
 #### Sort text file and remove duplicates in place
 
     sort -uo filename.list filename.list
