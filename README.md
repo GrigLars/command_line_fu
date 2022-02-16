@@ -1,9 +1,18 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Using ansible vault encryption via the command line, the short aliased version
+
+If you have an encrypted ansible vault, with all your passwords and so on, and you have THAT locked by a password (you should), sometimes it makes the command line laborious.  I have created two aliases:
+
+    alias apvault='ansible-playbook --vault-password-file=~/.ssh/vault_pass'
+    alias avault='ansible --vault-password-file=~/.ssh/vault_pass -b'
+
+The `~/.ssh/vault_pass` is the key and the `-b` is the "become" needed for root access when just running ansible commands. 
+
 #### Base64 obfuscation 
 
-Something near and dear to my heart is the openness of sharing ideas, discoveries, and code. One of my pet peeves is, every once in a while, a sysadmin or coder comes along that doesn't weant to share. They use basic ways to make their code unreadable on purpose, maybe to secure their jobs, hide the fact what they don't know for better coders, or just to be difficult. This is something I ran into years ago, and I thought about making it a separate page, but meh.  Say you have a script, `ten.sh`:
+Something near and dear to my heart is the openness of sharing ideas, discoveries, and code. One of my pet peeves is, every once in a while, a sysadmin or coder comes along that doesn't want to share. They use basic ways to make their code unreadable on purpose, maybe to secure their jobs, hide the fact what they don't know for better coders, or just to be difficult. This is something I ran into years ago. Say you have a script, `ten.sh`:
 
     #!/usr/bin/env bash
     echo "This is a bunch of numbers"
