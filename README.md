@@ -1,6 +1,15 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Remove lines using sed
+
+    sed '/^u/d' file		# Remove all lines that start with 'u'
+    sed '/x$/d' file		# Remove all lines that end with 'x'
+    sed '/^[A-Z]*$/d' file	# Remove all lines that have capital letters
+    sed '/debian/d' file	# Remove all lines that have the word 'debian'
+    sed 'M,Nd' file		# Remove lines M to N (don't forget the small d)
+    sed 'Nd' file		# Remove line N from file 
+
 #### rsync using ssh key
 
     rsync -auvz -e "ssh -i  ~/.ssh/somekey" codebase/foo user@hostname:/var/www/app
