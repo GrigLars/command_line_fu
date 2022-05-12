@@ -5,10 +5,10 @@ These are just notes for command line stuff I have learned over the years: short
 
     sed '/^u/d' file		# Remove all lines that start with 'u'
     sed '/x$/d' file		# Remove all lines that end with 'x'
-    sed '/^[A-Z]*$/d' file	# Remove all lines that have capital letters
-    sed '/debian/d' file	# Remove all lines that have the word 'debian'
-    sed 'M,Nd' file		# Remove lines M to N (don't forget the small d)
-    sed 'Nd' file		# Remove line N from file 
+    sed '/^[A-Z]*$/d' file		# Remove all lines that have capital letters
+    sed '/debian/d' file		# Remove all lines that have the word 'debian'
+    sed 'M,Nd' file			# Remove lines M to N (don't forget the small d)
+    sed 'Nd' file			# Remove line N from file 
 
 #### rsync using ssh key
 
