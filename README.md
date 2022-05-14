@@ -63,7 +63,7 @@ And you can still run it.  If you want to see what that hash is, just edit `secr
 
 #### Making a RAM disk to install an entire OS guest into memory
 
-Sometimes I am just testing an new concept or distro, and I install in directly to RAM. RAM is cheap tese days, and why clutter my hard drive and wear down my SSD with files I am gonna delete right away, anyway?
+Sometimes I am just testing an new concept or distro, and I install in directly to RAM. RAM is cheap these days, and why clutter my hard drive and wear down my SSD with files I am gonna delete right away, anyway?
 
     sudo mkdir /tmp/ramdisk
     sudo mount -t tmpfs -o size=12G vmramdisk /tmp/ramdisk
