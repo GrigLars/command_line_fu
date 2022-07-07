@@ -60,6 +60,7 @@ And you can still run it.  If you want to see what that hash is, just edit `secr
 	curl ipinfo.io/ip
 	curl api.ipify.org
 	curl checkip.dyndns.org
+	hostname -i
 
 #### Making a RAM disk to install an entire OS guest into memory
 
