@@ -1,6 +1,14 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### The chrony equivalent to the ntpdate SERVER-ADDRESS command is:
+
+    chronyd -q 'server SERVER-ADDRESS iburst'
+
+Note that chronyd must not be already running, just as ntpd must not be running when setting the date with ntpdate. If that doesn't work, after that you may need an additional: 
+
+    sudo systemctl start chronyd; sudo chronyc -a 'burst 4/4' 
+
 #### Remove lines using sed
 
     sed '/^u/d' file		# Remove all lines that start with 'u'
