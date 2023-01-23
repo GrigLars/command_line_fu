@@ -9,9 +9,20 @@ First, shut down the bad instance.
 
 Next, set up a rescue instance made with the SAME KEY as the unbootable system, with the bad volume as an attachment (but obviously not the boot/root drive), spin up the rescue instance with LVM service enabled, with the volume (or hard drive from the dead system) enabled. 
 
+Note: if the system is working fine, and you just want to move the Volume Group (VG), then you need to mark the VG as offline and export it.
+
+```
+# vgchange -an vg_opt
+ vgchange -- volume group "vg_opt" successfully deactivated
+
+# vgexport vg_opt
+ vgexport -- volume group "vg_opt" successfully exported
+```
+
 Then log on to the rescue instance using the ec2-user account with the pem key
 
-```ssh -i old_instance.pem ec2-user@<ip address>
+```
+ssh -i old_instance.pem ec2-user@<ip address>
 ```
 
 Show that the device is attached 
