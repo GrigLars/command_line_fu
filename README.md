@@ -1,6 +1,96 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Rescuing an LVM volume/drive off a second rescue system:
+
+Say you have an LVM-system, where the root is LVM. Some of the newer Red Hat amis on AWS have this, but this also applies to a drive rescue.  In any case, you have a "foreign LVM structure" mounted onto another system. In this case, we're going to say an AWS rescue: an fstab was improperly edited or corrupted, and the ec2 instance hangs.
+
+First, shut down the bad instance.
+
+Next, set up a rescue instance made with the SAME KEY as the unbootable system, with the bad volume as an attachment (but obviously not the boot/root drive), spin up the rescue instance with LVM service enabled, with the volume (or hard drive from the dead system) enabled. 
+
+Then log on to the rescue instance using the ec2-user account with the pem key
+
+```ssh -i old_instance.pem ec2-user@<ip address>
+```
+
+Show that the device is attached 
+
+```[root@ip-10-12-34-56 ~]# lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda                      202:0    0    8G  0 disk
+└─xvda1                   202:1    0    8G  0 part /
+xvdf                      202:80   0  100G  0 disk
+├─xvdf1                   202:81   0  500M  0 part
+├─xvdf2                   202:82   0 49.5G  0 part # Attached old LVM2 drive  <<<<<<<<<<
+│ ├─vg_root-var           253:2    0   15G  0 lvm
+│ ├─vg_root-home          253:3    0   10G  0 lvm
+│ ├─vg_root-tmp           253:4    0    5G  0 lvm
+│ ├─vg_root-root          253:5    0 18.8G  0 lvm  # This is the LVM2 partition we want to mount
+│ └─vg_root-swap          253:6    0    2G  0 lvm
+└─xvdf3                   202:83   0   50G  0 part    
+  ├─vg_root-opt			  253:0    0    4G  0 lvm
+  └─vg_root-app           253:2    0   15G  0 lvm
+```
+
+Run pvscan to see the LVM structure 
+
+```sudo pvscan
+  PV /dev/xvdf4   VG vg_opt          lvm2 [<1000.00 GiB / 0    free]  
+  PV /dev/xvdf2   VG vg_root         lvm2 [99.00 GiB / <26.67 GiB free]  
+  Total: 2 [1.07 TiB] / in use: 2 [1.07 TiB] / in no VG: 0 [0   ] 
+```
+
+Use lvdisplay to find the correct LV to mount for the root filesystem
+
+```[...]
+ --- Logical volume ---
+  LV Path                /dev/vg_root/root   # <<<<<<<<<<  This is the path we want to use below
+  LV Name                root
+  VG Name                vg_root
+  LV UUID                QEdQYT-6QG9-AauM-7foI-jXtQ-3lGX-l6m64c
+  LV Write Access        read/write
+  LV Creation host, time localhost, 2017-09-18 14:31:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                <18.79 GiB
+  Current LE             4810
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:5
+[...]
+```
+
+Note: in some cases, you might need to do a "vgimport" which is slightly different on each LVM type. For LVM1, you have to add ALL PV's if there is more than one in the VG, separated by spaces
+
+```vgimport vg_root 			 				# for LVM2 
+vgimport vg_root /dev/xvdf2  	 			# for LVM1 as per above
+vgimport vg_root /dev/xvdf2 /dev/xvdf4		# for LMV1 if there were 2 PVs
+
+vgchange -ay vg_root						# Optional: only do this if the volume was disabled and exported
+```
+You should be able to mount it now, in this case /mnt 
+
+```[root@ip-10-12-34-56 ~]# mount /dev/vg_root/root /mnt
+[root@ip-10-12-34-56 ~]# df -h /mnt
+
+Filesystem                Size  Used Avail Use% Mounted on
+/dev/mapper/vg_root-root  119G  7.0G   112G  38% /mnt
+```
+
+Then copy the old bad fstab to study later:
+
+```[root@ip-10-12-34-56 ~]# cp /mnt/etc/fstab /mnt/etc/fstab.bad.2022-12-30
+```
+
+Edit the fstab, and make the corrections. It's best to make the system *minimally bootable* but commenting out everything EXCEPT what you need: keep root, var, or whatever to make the systems bootable, and comment out an CR-ROM drives, non-root USB drives, nfs, smb, and so on. 
+
+Shut down the rescue instance, and boot the old instance with the volume mounted as before.
+
+Then, if it boots successfully, you can uncomment the line item in fstab one by one after after boot and do a "mount -av" to remount the filesystems on the live system.
+
 #### The chrony equivalent to the ntpdate SERVER-ADDRESS command is:
 
     chronyd -q 'server SERVER-ADDRESS iburst'
