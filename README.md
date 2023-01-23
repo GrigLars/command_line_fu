@@ -35,7 +35,8 @@ xvdf                      202:80   0  100G  0 disk
 
 Run pvscan to see the LVM structure 
 
-```sudo pvscan
+```
+sudo pvscan
   PV /dev/xvdf4   VG vg_opt          lvm2 [<1000.00 GiB / 0    free]  
   PV /dev/xvdf2   VG vg_root         lvm2 [99.00 GiB / <26.67 GiB free]  
   Total: 2 [1.07 TiB] / in use: 2 [1.07 TiB] / in no VG: 0 [0   ] 
@@ -43,7 +44,8 @@ Run pvscan to see the LVM structure
 
 Use lvdisplay to find the correct LV to mount for the root filesystem
 
-```[...]
+```
+[...]
  --- Logical volume ---
   LV Path                /dev/vg_root/root   # <<<<<<<<<<  This is the path we want to use below
   LV Name                root
@@ -65,15 +67,18 @@ Use lvdisplay to find the correct LV to mount for the root filesystem
 
 Note: in some cases, you might need to do a "vgimport" which is slightly different on each LVM type. For LVM1, you have to add ALL PV's if there is more than one in the VG, separated by spaces
 
-```vgimport vg_root 			 				# for LVM2 
+```
+vgimport vg_root 			 				# for LVM2 
 vgimport vg_root /dev/xvdf2  	 			# for LVM1 as per above
 vgimport vg_root /dev/xvdf2 /dev/xvdf4		# for LMV1 if there were 2 PVs
 
 vgchange -ay vg_root						# Optional: only do this if the volume was disabled and exported
 ```
+
 You should be able to mount it now, in this case /mnt 
 
-```[root@ip-10-12-34-56 ~]# mount /dev/vg_root/root /mnt
+```
+[root@ip-10-12-34-56 ~]# mount /dev/vg_root/root /mnt
 [root@ip-10-12-34-56 ~]# df -h /mnt
 
 Filesystem                Size  Used Avail Use% Mounted on
@@ -82,7 +87,8 @@ Filesystem                Size  Used Avail Use% Mounted on
 
 Then copy the old bad fstab to study later:
 
-```[root@ip-10-12-34-56 ~]# cp /mnt/etc/fstab /mnt/etc/fstab.bad.2022-12-30
+```
+[root@ip-10-12-34-56 ~]# cp /mnt/etc/fstab /mnt/etc/fstab.bad.2022-12-30
 ```
 
 Edit the fstab, and make the corrections. It's best to make the system *minimally bootable* but commenting out everything EXCEPT what you need: keep root, var, or whatever to make the systems bootable, and comment out an CR-ROM drives, non-root USB drives, nfs, smb, and so on. 
