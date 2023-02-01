@@ -3,7 +3,7 @@ These are just notes for command line stuff I have learned over the years: short
 
 #### Using ssh-agent to log in without having to do "-i" at every commandline
 
-I had a series of boxes I had to log into via a AWS key, and I found I coukld just add it to a "keychain" via na agent.
+I had a series of boxes I had to log into via a AWS key, and I found I could just add it to a "keychain" via an agent.
 
 ```
 $ ssh-agent bash
