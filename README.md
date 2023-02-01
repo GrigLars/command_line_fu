@@ -1,6 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Using ssh-agent to log in without having to do "-i" at eveery commandline
+
+I had a series of boxes I had to log into via a AWS key, and I found I coukld just add it to a "keychain" via na agent.
+
+```
+$ ssh-agent bash
+$ ssh-add ~/aws-setup-ec2-key.pem
+$ ssh-add -l 	# to list what keys are loaded
+```
+
 #### Rescuing an LVM volume/drive off a second rescue system:
 
 Say you have an LVM-system, where the root is LVM. Some of the newer Red Hat amis on AWS have this, but this also applies to a drive rescue.  In any case, you have a "foreign LVM structure" mounted onto another system. In this case, we're going to say an AWS rescue: an fstab was improperly edited or corrupted, and the ec2 instance hangs.
