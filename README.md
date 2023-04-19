@@ -1,6 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Using escape characters in bash "read" statements
+
+I wanted to have some color to my bash probmpts:
+
+```
+localhost$ read -p $'\e[31;1mEnter in your codex:\t\e[0m ' FOO; echo -e "\e[32mCodex you entered:\t\e[0;1m $FOO"
+Enter in your codex:     45645674	# This will be red except for the codex entered
+Codex you entered:       45645674       # This will be green except for the codex
+```
+
 #### Using ssh-agent to log in without having to do "-i" at every commandline
 
 I had a series of boxes I had to log into via a AWS key, and I found I could just add it to a "keychain" via an agent.
@@ -9,6 +19,13 @@ I had a series of boxes I had to log into via a AWS key, and I found I could jus
 $ ssh-agent bash
 $ ssh-add ~/aws-setup-ec2-key.pem
 $ ssh-add -l 	# to list what keys are loaded
+```
+There's also a way with passwords, if sshpass is installed. This takes a list of hosts from "hosts_file" and runs through them. Note the space in front of the "SECRETPASS," it's supposed to keep it from showing up in your history, but this is still at-your-own-risk:
+```
+[space] SECRETPASS="passwd123";\
+for HOSTLIST in $(cat hosts_file);\
+do sshpass -p $SECRETPASS ssh -q username@$HOSTLIST 'uptime';\
+done
 ```
 #### Rescuing an LVM volume/drive off a second rescue system:
 
