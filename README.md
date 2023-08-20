@@ -1,6 +1,21 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Some tips on connecting a dumb terminal to modern systemd Linux
+
+A lot of sites tell you about /etc/inittab that don't quite work in modern systems.  Ignore those if you have systemd (which most modern systems do). In my case, I had a 9-pin serial connection at /dev/ttyS0. Here's how I found out the bit rate:
+
+```
+:~$ stty -F /dev/ttyS0 speed
+9600
+```
+I made sure my dumb terminal was set at 8 bit per character, no parity, and 1 stop-bit.  Then, for systemd, I had to attach the serial to the getty service:
+
+```
+:~$ sudo systemctl enable serial-getty@ttyS0.service --now
+Created symlink /etc/systemd/system/getty.target.wants/serial-getty@ttyS0.service → /lib/systemd/system/serial-getty@.service.
+```
+
 #### Using escape characters in bash "read" statements
 
 I wanted to have some color to my bash probmpts:
