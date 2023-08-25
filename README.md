@@ -8,6 +8,9 @@ A lot of sites tell you about /etc/inittab that don't quite work in modern syste
 ```
 :~$ stty -F /dev/ttyS0 speed
 9600
+:~$ stty -F /dev/ttyS0 115200 	# To set at 115200
+:~$ stty -F /dev/ttyS0 speed
+115200
 ```
 I made sure my dumb terminal was set at 8 bit per character, no parity, and 1 stop-bit.  Then, for systemd, I had to attach the serial to the getty service:
 
@@ -18,7 +21,7 @@ Created symlink /etc/systemd/system/getty.target.wants/serial-getty@ttyS0.servic
 
 #### Using escape characters in bash "read" statements
 
-I wanted to have some color to my bash probmpts:
+I wanted to have some color to my bash prompts:
 
 ```
 localhost$ read -p $'\e[31;1mEnter in your codex:\t\e[0m ' FOO; echo -e "\e[32mCodex you entered:\t\e[0;1m $FOO"
