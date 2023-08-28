@@ -1,6 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Logging inside a script to an external script
+
+I used to create a function call "fLog" that would log everything, but there's an even quicker way:
+```
+OUTPUT_FILE="/path/to/output.log"
+echo "After this line, all output goes to $OUTPUT_FILE"
+exec >> "$OUTPUT_FILE" 2>&1
+```
+I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.
+
 #### Some tips on connecting a dumb terminal to modern systemd Linux
 
 A lot of sites tell you about /etc/inittab that don't quite work in modern systems.  Ignore those if you have systemd (which most modern systems do). In my case, I had a 9-pin serial connection at /dev/ttyS0. Here's how I found out the bit rate:
