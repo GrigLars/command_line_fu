@@ -11,6 +11,11 @@ exec >> "$OUTPUT_FILE" 2>&1
 ```
 I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.
 
+You can also run "script" which records a session:
+```
+script -a ./log_session.log
+```
+
 #### Some tips on connecting a dumb terminal to modern systemd Linux
 
 A lot of sites tell you about /etc/inittab that don't quite work in modern systems.  Ignore those if you have systemd (which most modern systems do). In my case, I had a 9-pin serial connection at /dev/ttyS0. Here's how I found out the bit rate:
