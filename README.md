@@ -17,6 +17,11 @@ PART_FS=${PART_ARRAY[1]}			# The filesystem is the second part
 IFS='/' read -ra MAPPER_ARRAY <<< "${PART_DEV}" # You can further divide the device as dev, mapper, volgroup00-lv00 
 ```
 
+You can also use mapfile
+```
+mapfile -d' ' foo <<< $(df -hT | grep /dev/mmcblk0p2); echo ${foo[1]}
+```
+
 #### Logging inside a script to an external log
 
 I used to create a function call "fLog" that would log everything, but there's an even quicker way:
