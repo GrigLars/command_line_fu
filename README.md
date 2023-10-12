@@ -5,7 +5,7 @@ These are just notes for command line stuff I have learned over the years: short
 
 There are ways to get a single element from a line using echo and awk:
 ```
-$ echo "/dev/mapper/volgroup00-lv00" | awk -F'\' '{print $3}'
+$ echo "/dev/mapper/volgroup00-lv00" | awk -F'/' '{print $3}'
 ```
 
 But another way can be using read to read into an array
@@ -14,7 +14,7 @@ PART_INFO=$(df -hT | grep ${PARTITION})		# Read in some parititon info
 IFS=' ' read -ra PART_ARRAY <<< "${PART_INFO}"  # Put the partition info in an array
 PART_DEV=${PART_ARRAY[0]}			# The device is the first part
 PART_FS=${PART_ARRAY[1]}			# The filesystem is the second part
-IFS='/' read -ra MAPPER_ARRAY <<< "${PART_DEV}" # You can further divide the device as dev, mapper, volumegroup-logicalvolume 
+IFS='/' read -ra MAPPER_ARRAY <<< "${PART_DEV}" # You can further divide the device as dev, mapper, volgroup00-lv00 
 ```
 
 #### Logging inside a script to an external log
