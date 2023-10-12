@@ -1,6 +1,22 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Reading data from a line to an arrary
+
+There are ways to get a single element from a line using echo and awk:
+```
+$ echo "/dev/mapper/volgroup00-lv00" | awk -F'\' '{print $3}'
+```
+
+But another way can be using read to read into an array
+```
+PART_INFO=$(df -hT | grep ${PARTITION})		# Read in some parititon info
+IFS=' ' read -ra PART_ARRAY <<< "${PART_INFO}"  # Put the partition info in an array
+PART_DEV=${PART_ARRAY[0]}			# The device is the first part
+PART_FS=${PART_ARRAY[1]}			# The filesystem is the second part
+IFS='/' read -ra MAPPER_ARRAY <<< "${PART_DEV}" # You can further divide the device as dev, mapper, volumegroup-logicalvolume 
+```
+
 #### Logging inside a script to an external log
 
 I used to create a function call "fLog" that would log everything, but there's an even quicker way:
