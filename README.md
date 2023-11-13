@@ -1,6 +1,12 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### The ISO date format I always keep forgetting
+```
+date +'%Y-%m-%d_%H-%M-%S'
+2023-11-13_16-48-37
+```
+
 #### Reading data from a line to an arrary
 
 There are ways to get a single element from a line using echo and awk:
