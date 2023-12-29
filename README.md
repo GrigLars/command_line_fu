@@ -1,12 +1,33 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Test a port without "telnet"
+A lot of systems can't have the telnet package for security reasons.  But there are other ways to test ports on a remote system:
+
+Use the /dev/tcp port:
+```
+$ cat < /dev/tcp/192.168.1.4/22
+SSH-2.0-OpenSSH_6.2p2 Debian-6
+^C pressed here
+```
+Use curl:
+```
+$ curl http://192.168.1.4:3389
+curl: (7) couldn't connect to host
+```
+Use netcat:
+```
+nc -zv 10.6.0.1 80	# One port
+nc -zv 10.6.0.1 80 443	# Multiple ports
+nc -zv 10.6.0.1 20-29	# Port range
+```
+
 #### The ISO date format I always keep forgetting
 ```
 date +'%Y-%m-%d_%H-%M-%S'
 2023-11-13_16-48-37
 ```
-You can also just add timestamps by using "ts"
+You can also just add timestamps by using "ts" (usually in the package more-utils):
 ```
 echo "Hello" | ts
 Dec 29 16:28:15 Hello
