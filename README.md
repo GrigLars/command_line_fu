@@ -6,6 +6,21 @@ These are just notes for command line stuff I have learned over the years: short
 date +'%Y-%m-%d_%H-%M-%S'
 2023-11-13_16-48-37
 ```
+You can also just add timestamps by using "ts"
+```
+echo "Hello" | ts
+Dec 29 16:28:15 Hello
+```
+Note: "ts -r" can solve timestamps in relative format, for example:
+```
+$ sudo tail /var/log/syslog | ts -r
+5m10s ago server-dev1 systemd[1]: fwupd-refresh.service: Succeeded.
+5m10s ago server-dev1 systemd[1]: Finished Refresh fwupd metadata and update motd.
+5m4s ago server-dev1 CRON[1673984]: (root) CMD (command -v debian-sa1 > /dev/null && debian-sa1 1 1)
+1m4s ago server-dev1 CRON[1674253]: (root) CMD (/bin/bash /opt/heatbeat.sh > /dev/null 2>&1)
+4s ago server-dev1 CRON[1674279]: (root) CMD ([ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi)
+4s ago server-dev1 CRON[1674280]: (root) CMD (/bin/bash /opt/heatbeat.sh > /dev/null 2>&1)
+````
 
 #### Reading data from a line to an arrary
 
