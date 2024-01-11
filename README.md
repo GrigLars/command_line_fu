@@ -1,6 +1,13 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Erase something out of history
+Sometimes you accidentally put something in the bash history file you need to not be saved. A quick exit from the shell without saving to history is
+```
+kill -9 $$
+```
+Which will dump you out and not save to history.
+
 #### Test a port without "telnet"
 A lot of systems can't have the telnet package for security reasons.  But there are other ways to test ports on a remote system:
 
