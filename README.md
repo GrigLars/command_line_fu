@@ -1,6 +1,28 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Check if you're on x11 or Wayland
+This will become more of an issue soon, I think
+```
+echo $XDG_SESSION_TYPE
+x11
+```
+
+#### Telnet mail commands
+Because I keep having to look this up
+```
+EHLO test.example.com
+MAIL FROM: <SENDERADDRESS>
+RCPT TO: <RECIPIENTADDRESS>
+DATA
+Subject: Testmessage
+(Blank line, press Enter again)
+This is a test.
+(Blank line, press Enter again)
+.
+QUIT
+```
+
 #### Erase something out of history
 Sometimes you accidentally put something in the bash history file you need to not be saved. A quick exit from the shell without saving to history is
 ```
