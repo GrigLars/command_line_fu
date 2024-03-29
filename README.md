@@ -1,6 +1,13 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Timeout a runtime
+
+The timeout command will run a command for a specified amount of time and then To run a bash script for one hour, you would use the following command:
+```
+timeout 3600 bash ./your_script.sh
+```
+
 #### Check if you're on x11 or Wayland
 This will become more of an issue soon, I think
 ```
