@@ -1,8 +1,19 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
-#### Timeout a runtime
+#### Settup up forwarding
+To set up forwarding for a gateway, all you have to do is run two commands on the gateway
+```
+sudo iptables -t nat -A POSTROUTING -o <outgoing interface towards internet> -j MASQUERADE
+sudo sysctl -w net.ipv4.ip_forward=1
+````
+The systems behind the gateway then have to set their gateway IP to the IP interface interface on the gateway facing them. 
+```
+sudo￼ip route add default via <IP of gateway interface facing them>
+```
+You may have to set the DNS on those systems as well, but check with a `ping 8.8.8.8` to make sure at least they can get to the internet. 
 
+#### Timeout a runtime
 The timeout command will run a command for a specified amount of time and then To run a bash script for one hour, you would use the following command:
 ```
 timeout 3600 bash ./your_script.sh
