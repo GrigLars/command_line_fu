@@ -1,6 +1,12 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### SSH timeout on command line
+Try to connect for 5 seconds, otherwise give up. 
+```
+ssh -o ConnectTimeout=5
+````
+
 #### Settup up forwarding
 To set up forwarding for a gateway, all you have to do is run two commands on the gateway
 ```
