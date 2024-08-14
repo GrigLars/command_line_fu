@@ -4,7 +4,7 @@ These are just notes for command line stuff I have learned over the years: short
 #### SSH timeout on command line
 Try to connect for 5 seconds, otherwise give up. 
 ```
-ssh -o ConnectTimeout=5
+ssh -o ConnectTimeout=5 <user>@<IP address>
 ````
 
 #### Settup up forwarding
