@@ -7,7 +7,7 @@ Try to connect for 5 seconds, otherwise give up.
 ssh -o ConnectTimeout=5 <user>@<IP address>
 ````
 
-#### Settup up forwarding
+#### Setup up forwarding
 To set up forwarding for a gateway, all you have to do is run two commands on the gateway
 ```
 sudo iptables -t nat -A POSTROUTING -o <outgoing interface towards internet> -j MASQUERADE
@@ -125,7 +125,14 @@ OUTPUT_FILE="/path/to/output.log"
 echo "After this line, all output goes to $OUTPUT_FILE"
 exec >> "$OUTPUT_FILE" 2>&1
 ```
-I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.
+I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.  If you want to output to the terminal as well"
+```
+LOGPATH="./testlog.log"
+
+echo "This will only go to the screen"
+exec > >(tee -a ${LOGPATH}) 2> >(tee -a ${LOGPATH} >&2)
+echo "This, and further text will got to the screen and log"
+```
 
 You can also run "script" which records a session:
 ```
