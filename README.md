@@ -1,6 +1,31 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Make your bash scripts a little more robust
+```
+set -euo pipefail
+# -e means "Stop the script on an error" instead of just continuing.
+# -u means "unset variables." If a variable is not already set, then fail. This prevents "rm -rf $HOME/$DIRETCORY" types of failures when you mispelled "directory"
+# -o pipefail means that is part of a pipe fails, the whole statment fails.
+
+set -x
+# -x means "output step by step" for debuggung
+
+# Echo "Script exited" when script exits
+trap echo "Script exited" EXIT		
+
+# Clean up temp files when script exits on signals: SIGHUP, SIGINT, SIGQUIT, or SIGABRT
+#   trap -l will list number/signals for you
+$TRASH=$(mktemp -t tmp.XXXXXXXXXX)
+trap cleanup 1 2 3 6
+function cleanup()
+{
+  echo "Removing temporary files:"
+  rm -rf "$TRASH"
+  exit
+}
+```
+
 #### SSH timeout on command line
 Try to connect for 5 seconds, otherwise give up. 
 ```
