@@ -5,8 +5,9 @@ These are just notes for command line stuff I have learned over the years: short
 ```
 set -euo pipefail
 # -e means "Stop the script on an error" instead of just continuing.
-# -u means "unset variables." If a variable is not already set, then fail. This prevents "rm -rf $HOME/$DIRETCORY" types of failures when you mispelled "directory"
-# -o pipefail means that is part of a pipe fails, the whole statment fails.
+# -u means "unset variables." If a variable is not already set, then fail.
+#    This prevents "rm -rf $HOME/$DIRETCORY" types of failures when you mispelled "directory"
+# -o pipefail means that if part of a pipe fails, then the whole statment fails.
 
 set -x
 # -x means "output step by step" for debuggung
