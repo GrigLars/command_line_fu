@@ -1,6 +1,17 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Generate fake MAC addresses
+I sometimes need this for some VM deployments.
+```
+# This generates an actual random address
+  openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+# Ensure the MAC address starts with a unicast, locally administered address (for private use), you can modify the first byte:
+  mac=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'); echo "02${mac:2}"
+# I like mine to be 02:02:02 for easy of sorting on the DHCP side
+  echo "02:02:02:$(openssl rand -hex 3 | sed 's/\(..\)/\1:/g; s/:$//')"
+```
+
 #### Make your bash scripts a little more robust
 ```
 set -euo pipefail
