@@ -1,6 +1,11 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Check if matching SSH keys
+```
+ssh-keygen -l -f id_ed25519_key && ssh-keygen -l -f id_ed25519_key.pub
+```
+
 #### Generate fake MAC addresses
 I sometimes need this for some VM deployments.
 ```
