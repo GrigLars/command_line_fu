@@ -1,6 +1,15 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
 
+#### Some critical journalctl commands
+```
+journalctl -u avahi-daemon.service
+journalctl -u mysql.service -f
+journalctl -u openvpn.service -u sshd.service	
+journalctl --since "2019-07-05 21:30:01" --until "2019-07-05 21:30:02"
+journalctl -n50 --since "1 hour ago"
+```
+
 #### Check if matching SSH keys
 ```
 ssh-keygen -l -f id_ed25519_key && ssh-keygen -l -f id_ed25519_key.pub
