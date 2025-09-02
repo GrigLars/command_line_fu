@@ -1,5 +1,18 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
+#### Moving/Copying files using the "install" command from coreutils
+I learned about the install command today. This reduces a LOT of steps by changing multiple commands into on command. For example:
+
+```
+# Old and busted 
+sudo mkdir -p /etc/postfix
+sudo cp ./main.cf /etc/postfix/main.cf
+sudo chown root:postfix /etc/postfix/main.cf
+sudo chmod 755 /etc/postfix/main.cf
+
+# New Hotness
+sudo install -D -o root -g postfix -m 755 ./main.cf /etc/postfix/main.cf
+```
 
 #### Export a tcp/pcap dump to a second host 
 I had to sniff a suspicious device (192.168.1.107) off a local bridge (br0), but sadly, the local bridge host had a teeny drivespace, so I exported the tcpdump to a remote host that had more space. Also, the bridge wiped any file you wrote in a reboot, so this assured me that if I spent a week capturing packets, it wouldn't be lost in a power outage. 
