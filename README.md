@@ -208,6 +208,11 @@ You can also run "script" which records a session:
 ```
 script -a ./log_session.log
 ```
+Add something like the following to the bottom of your .bashrc, .zshrc, or other non-login startup file appropriate for your shell (i.e., not your ~/.profile, etc.):
+```
+script --log-io --append ~/logs/script/$(date +%F)_script.log
+```
+--log-io logs the command, stdin, stdout, and stderr (see man page for other options). Note that script starts a subshell, so to annotate the current log you'll want to Ctrl-d to log out of it, then source ~/.bashrc (or other appropriate rc file) to continue appending to today's log again.
 
 #### Some tips on connecting a dumb terminal to modern systemd Linux
 
