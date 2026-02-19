@@ -111,14 +111,14 @@ trap echo "Script exited" EXIT
 
 # Clean up temp files when script exits on signals: SIGHUP, SIGINT, SIGQUIT, or SIGABRT
 #   trap -l will list number/signals for you
-$TRASH=$(mktemp -t tmp.XXXXXXXXXX)
-trap cleanup 1 2 3 6
-function cleanup()
-{
+TRASH=$(mktemp) || exit 1
+cleanup() {
+  status=$?
   echo "Removing temporary files:"
-  rm -rf "$TRASH"
-  exit
+  rm -f "$TRASH"
+  exit "$status"
 }
+trap cleanup EXIT SIGHUP SIGINT SIGQUIT SIGABRT
 ```
 
 #### SSH timeout on command line
