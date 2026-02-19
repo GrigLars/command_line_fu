@@ -1,8 +1,54 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
-#### Moving/Copying files using the "install" command from coreutils
-I learned about the install command today. This reduces a LOT of steps by changing multiple commands into on command. For example:
+#### Some tips on "non-space space characters ####
+I ran into some Windows clipboard issues beyond the CR/LF, where some mail clients change the usual "space" character to so0me high-ascii bit, and that becomes a problem. To identify this, 
+```
+cat /tmp/deleteme.yml
+- name: Grow /opt/service online (RHEL 8.10; XFS; mix of disk/part/LVM)
+  hosts: all
+  become: true
+  gather_facts: false
 
+  vars:
+    mnt: /opt/service
+
+  tasks:
+    - name: Ensure required tools are present
+      ansible.builtin.dnf:
+        name:
+          - util-linux            # lsblk, findmnt
+          - xfsprogs              # xfs_growfs
+          - cloud-utils-growpart  # growpart
+          - lvm2                  # pvs/lvs/pvresize/lvextend
+        state: present
+```
+But it wouldn't work, and kept giving me errors.  Turned out that the spaces and tabs used in Outlook Mail was just making up stuff.
+```
+cat -A /tmp/deleteme.yml
+---$
+- name: Grow /opt/service online (RHEL 8.10; XFS; mix of disk/part/LVM)$
+M-BM-  hosts: all$
+M-BM-  become: true$
+M-BM-  gather_facts: false$
+$
+M-BM-  vars:$
+M-BM-  M-BM-  mnt: /opt/service$
+$
+M-BM-  tasks:$
+M-BM-  M-BM-  - name: Ensure required tools are present$
+M-BM-  M-BM-  M-BM-  ansible.builtin.dnf:$
+M-BM-  M-BM-  M-BM-  M-BM-  name:$
+M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  - util-linux M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM- # lsblk, findmnt$
+M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  - xfsprogs M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM- # xfs_growfs$
+M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  - cloud-utils-growpart M-BM- # growpart$
+M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  - lvm2 M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM-  M-BM- # pvs/lvs/pvresize/lvextend$
+M-BM-  M-BM-  M-BM-  M-BM-  state: present$
+$
+```
+The ```M-BM-  M-BM-  ``` was a different blank space than regular space.  ```\xA0``` is the hexadecimal escape sequence for a non-breaking space (NBSP)  I had to run ```sed -i 's/\xC2\xA0/ /g' /tmp/deleteme.yml``` to fix it.  The hex for regular space is ```x20``` or just "space" in that sed command. Many regular expression engines include it in the whitespace set (```\s```), but you can target it specifically using ```\xA0.```  The tipoff what my vim syntax highlighting was not working as well as it should, and it turned out those NBSP were all over the paste. 
+
+#### Moving/Copying files using the "install" command from coreutils
+I learned about the install command today. This reduces a LOT of steps by changing multiple commands into on command. For example, I had this:
 ```
 # Old and busted 
 sudo mkdir -p /etc/postfix
