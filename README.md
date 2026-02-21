@@ -1,5 +1,16 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
+#### Brace expansion handles backup names quickly
+Instead of
+```
+cp config.yml config.yml.bak
+```
+do
+```
+cp config.yml{,.bak}
+cp config.yml{,.$(date +%F)}
+```
+
 #### Some tips on "non-space/space characters" ####
 I ran into some Windows clipboard issues beyond the CR/LF, where some mail clients change the usual "space" character to some high-ascii bit, and that becomes a problem when running or compiling code (ansible especially has non-intuitive errors). It looks normal...
 ```
