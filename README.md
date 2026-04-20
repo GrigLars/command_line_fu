@@ -709,6 +709,7 @@ I have found myself in multiple jobs trying to figure out all kinds of cron jobs
     sudo systemctl list-units --type=service
     sudo systemctl --type=service --state=active
     sudo systemctl --type=service --state=running
+	sudo systemctl list-units --failed
     
 Your best bet is to run this as an alias:
 
