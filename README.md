@@ -211,7 +211,7 @@ nc -zv 10.6.0.1 20-29	# Port range
 date +'%Y-%m-%d_%H-%M-%S'
 2023-11-13_16-48-37
 ```
-You can also just add timestamps by using "ts" (usually in the package more-utils):
+You can also just add timestamps by using "ts" (usually in the package "moreutils" in deb/rpm):
 ```
 echo "Hello" | ts
 Dec 29 16:28:15 Hello
