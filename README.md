@@ -1,5 +1,20 @@
 # Command Line Fu
 These are just notes for command line stuff I have learned over the years: shortcuts and so on.  Some are commands that I keep forgetting, or get messed up on the order.  They are in no real order except the most recent discoveries are often on top.  Unless otherwise stated, these are CLI from bash shells on Linux.  These might also help someone else.
+
+#### DNS — Find configured DNS servers
+
+# systemd-resolved systems
+`resolvectl dns`
+
+# Traditional resolver configuration (Debian/RHEL/etc.)
+`grep '^nameserver' /etc/resolv.conf`
+
+# NetworkManager systems
+`nmcli -g IP4.DNS,IP6.DNS device show`
+
+# Check what actually answers a DNS query
+`dig example.com | grep SERVER`
+
 #### Brace expansion handles backup names quickly
 Instead of
 ```
@@ -256,7 +271,7 @@ OUTPUT_FILE="/path/to/output.log"
 echo "After this line, all output goes to $OUTPUT_FILE"
 exec >> "$OUTPUT_FILE" 2>&1
 ```
-I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.  If you want to output to the terminal as well"
+I'd often just output things like "INFO - sometext" and "ERR - someerror" and then do a grep on $OUTPUT_FILE.  The script wouldn't output anything, but if I needed to see what the script was doing, I could comb through the log.  If you want to output to the terminal as well:
 ```
 LOGPATH="./testlog.log"
 
