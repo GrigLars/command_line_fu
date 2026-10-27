@@ -4,16 +4,24 @@ These are just notes for command line stuff I have learned over the years: short
 #### DNS — Find configured DNS servers
 
 systemd-resolved systems
-```resolvectl dns```
+```
+resolvectl dns
+```
 
 Traditional resolver configuration (Debian/RHEL/etc.)
-```grep '^nameserver' /etc/resolv.conf```
+```
+grep '^nameserver' /etc/resolv.conf
+```
 
 NetworkManager systems
-```nmcli -g IP4.DNS,IP6.DNS device show```
+```
+nmcli -g IP4.DNS,IP6.DNS device show
+```
 
 Check what actually answers a DNS query
-```dig example.com | grep SERVER```
+```
+dig example.com | grep SERVER
+```
 
 #### Brace expansion handles backup names quickly
 Instead of
